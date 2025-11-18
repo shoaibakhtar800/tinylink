@@ -3,15 +3,14 @@ import { db } from "~/server/db";
 
 export async function GET(
   req: Request,
-  { params }: { params: { code: string } },
+  context: { params: { code: string } }
 ) {
-  const { code } = params;
+  const { code } = context.params;
   const link = await db.link.findUnique({ where: { code } });
   if (!link) {
     return new NextResponse("Not found", { status: 404 });
   }
 
-  // update clicks & lastClicked
   await db.link.update({
     where: { code },
     data: {

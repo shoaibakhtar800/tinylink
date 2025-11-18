@@ -7,7 +7,6 @@ export function isValidCode(code: string) {
 export function isValidUrl(url: string) {
     try {
         const parsed = new URL(url);
-        // allow http or https
         return parsed.protocol === "http:" || parsed.protocol === "https:";
     } catch {
         return false;
@@ -15,7 +14,6 @@ export function isValidUrl(url: string) {
 }
 
 export function normalizeUrl(url: string) {
-    // Ensure protocol present
     if (!/^https?:\/\//i.test(url)) {
         return `https://${url}`;
     }

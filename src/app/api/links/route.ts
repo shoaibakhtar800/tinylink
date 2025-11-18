@@ -32,7 +32,6 @@ export async function POST(req: Request) {
         { status: 400 },
       );
     }
-    // check existence
     const existing = await db.link.findUnique({ where: { code } });
     if (existing) {
       return NextResponse.json(
@@ -41,9 +40,7 @@ export async function POST(req: Request) {
       );
     }
   } else {
-    // generate random 7-char code
     code = generateRandomCode(7);
-    // ensure uniqueness (loop once or twice)
     let attempts = 0;
     while (attempts < 5) {
       const check = await db.link.findUnique({ where: { code } });
