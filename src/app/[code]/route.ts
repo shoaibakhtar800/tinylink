@@ -3,7 +3,7 @@ import { db } from "~/server/db";
 
 export async function GET(
   req: Request,
-  context: { params: { code: string } }
+  context
 ) {
   const { code } = context.params;
   const link = await db.link.findUnique({ where: { code } });
