@@ -13,11 +13,11 @@ export default function HomePage() {
     const res = await fetch(`${env.NEXT_PUBLIC_BASE_URL}/api/links`, {
       cache: "no-store",
     });
-    setLinks(await res.json());
+    setLinks(await res.json() as Link[]);
   };
 
   useEffect(() => {
-    getAllLinks();
+    void getAllLinks();
   }, []);
 
   return (

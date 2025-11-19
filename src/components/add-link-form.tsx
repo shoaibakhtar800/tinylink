@@ -15,23 +15,23 @@ export default function AddLinkForm({ getAllLinks }: { getAllLinks: () => void }
   const [msg, setMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function submit(e: any) {
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setMsg(null);
     setLoading(true);
 
     const res = await fetch("/api/links", {
       method: "POST",
-      body: JSON.stringify({ targetUrl, code: code || undefined }),
+      body: JSON.stringify({ targetUrl, code: code ? code : undefined }),
       headers: { "Content-Type": "application/json" },
     });
 
-    const data = await res.json();
+    const data = await res.json() as { code?: string; error?: string };
     setLoading(false);
 
     if (!res.ok) {
-      setMsg(data.error || "Something went wrong");
-      toast.error(data.error || "Something went wrong");
+      setMsg(data.error ?? "Something went wrong");
+      toast.error(data.error ?? "Something went wrong");
       return;
     }
 

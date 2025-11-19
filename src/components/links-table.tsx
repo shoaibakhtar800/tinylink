@@ -21,12 +21,13 @@ import {
 } from "./ui/dialog";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import type { Link } from "generated/prisma";
 
 export default function LinksTable({
   links,
   onDelete,
 }: {
-  links: any[];
+  links: Link[];
   onDelete: (code: string) => void;
 }) {
   const router = useRouter();

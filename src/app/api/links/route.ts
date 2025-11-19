@@ -8,11 +8,11 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
+  const body = await req.json().catch(() => null) as { targetUrl?: string; code?: string };
   if (!body)
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
 
-  let { targetUrl, code } = body as { targetUrl?: string; code?: string };
+  let { targetUrl, code } = body;
 
   if (!targetUrl)
     return NextResponse.json(
