@@ -1,13 +1,11 @@
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { db } from "~/server/db";
 
-export default async function StatsPage({
-  params,
-}: {
-  params: { code: string };
-}) {
+export default async function StatsPage(props: any) {
+  const { code } = props.params;
+
   const link = await db.link.findUnique({
-    where: { code: params.code },
+    where: { code },
   });
 
   if (!link) return <div className="text-center text-xl">Not Found</div>;
