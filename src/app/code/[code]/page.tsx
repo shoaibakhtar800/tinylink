@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { db } from "~/server/db";
 
 export default async function StatsPage(props: any) {
-  const { code } = props.params;
+  const { code } = props.params as { code: string };
 
   const link = await db.link.findUnique({
     where: { code },

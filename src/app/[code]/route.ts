@@ -3,7 +3,8 @@ import { db } from "~/server/db";
 
 // @ts-expect-error Next.js dynamic route context has no type
 export async function GET(req: NextRequest, context) {
-  const { code } = context.params;
+  const { code } = context.params as { code: string };
+  
   const link = await db.link.findUnique({ where: { code } });
   if (!link) {
     return new NextResponse("Not found", { status: 404 });
